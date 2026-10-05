@@ -1,0 +1,13 @@
+# Interactive visualization: ./scintbar
+/run/initialize
+/vis/open
+/vis/drawVolume
+/vis/viewer/set/viewpointThetaPhi 60 30 deg
+/vis/viewer/set/autoRefresh true
+/vis/scene/add/trajectories smooth
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set opticalphoton green
+/vis/modeling/trajectories/drawByParticleID-0/set mu- red
+/vis/modeling/trajectories/drawByParticleID-0/set e- yellow
+/vis/scene/endOfEventAction accumulate
+# Drawing ~10^4 optical photon tracks is slow: shoot only 1-2 events in the GUI, e.g. /run/beamOn 1

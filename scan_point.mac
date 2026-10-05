@@ -1,0 +1,11 @@
+# One scan point; called by scan.mac with the alias {d} = distance in cm
+# from the SiPM-side (left) end of the bar.
+
+# x (mm) = d * 10 - barHalf
+/control/multiply dmm {d} 10
+/control/subtract xmm {dmm} {barHalf}
+
+/control/echo "=== Scan point: d = {d} cm from SiPM-side end, gun x = {xmm} mm ==="
+/gun/position {xmm} 0 150 mm
+/analysis/setFileName scintbar_d{d}cm
+/run/beamOn {nEvents}

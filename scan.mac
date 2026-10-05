@@ -1,0 +1,24 @@
+# ---------------------------------------------------------------------------
+# Position scan along the bar: ./scintbar scan.mac
+#
+# Muons hit the bar at d = 1, 2, ..., 9 cm from the SiPM-side end (left end,
+# x = -barHalf). One run per position, one ROOT file per position:
+#   scintbar_d1cm.root ... scintbar_d9cm.root
+# Merge them afterwards with:  hadd -f scan_all.root scintbar_d*cm.root
+# ---------------------------------------------------------------------------
+/run/numberOfThreads 8
+/run/initialize
+/tracking/verbose 0
+/run/printProgress 200
+
+# Half-length of the bar in mm: must match kBarLength / 2 in DetectorConstruction.cc
+/control/alias barHalf 48
+
+# Events per position
+/control/alias nEvents 1000
+
+/gun/particle mu-
+/gun/energy 4 GeV
+/gun/direction 0 0 -1
+
+/control/foreach scan_point.mac d "1 2 3 4 5 6 7 8 9"
